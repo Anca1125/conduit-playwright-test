@@ -6,7 +6,7 @@ export class BasePage {
     this.page = page;
   }
   async navigateTo(url: string) {
-    await this.page.goto("url");
+    await this.page.goto(url);
   }
   async getTitle() {
     return this.page.title();
