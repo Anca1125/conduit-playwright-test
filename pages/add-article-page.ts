@@ -42,4 +42,12 @@ export class AddNewArticlePage extends BasePage {
   async publishArticle() {
     await this.publishArticleButton.click();
   }
+  async createArticle(title: string) {
+    await this.openNewArticleLink();
+    await this.completeArticleTitle(title);
+    await this.completeArticleDescription("About Playwrigt");
+    await this.completeArticleTextBody("I love Playwright");
+    await this.completeTagsArticle("Playwright");
+    await this.publishArticle();
+  }
 }

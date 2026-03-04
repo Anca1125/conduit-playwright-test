@@ -1,12 +1,12 @@
 import { test, expect } from "@playwright/test";
 import { SignUpPage } from "../pages/signup-page";
 import { signUpData } from "../test-data/signUp-data";
-
 test.describe("signup flow", () => {
   let signUpPage: SignUpPage;
 
   test.beforeEach(async ({ page }) => {
     signUpPage = new SignUpPage(page);
+
     await page.goto("/");
   });
   test("sign up - happy flow", async ({ page }) => {

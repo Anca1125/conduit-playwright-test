@@ -6,15 +6,17 @@ export class NewArticlePage extends BasePage {
   readonly deleteArticle: Locator;
   readonly writeAComment: Locator;
   readonly postAcomment: Locator;
+  readonly deleteCommentButton: Locator;
   readonly likeTheArticle: Locator;
 
   constructor(page: Page) {
     super(page);
     this.editArticle = page.locator(".ion-edit").first();
-    this.deleteArticle = page.locator(".ion-trash-a").first();
+    this.deleteArticle = page.locator(".article-actions .ion-trash-a");
     this.writeAComment = page.locator('[placeholder="Write a comment..."]');
     this.postAcomment = page.locator('[type="submit"]');
-    this.likeTheArticle = page.locator(".ion-heart").first();
+    this.deleteCommentButton = page.locator(".card-footer .ion-trash-a");
+    this.likeTheArticle = page.locator(" .ion-heart").first();
   }
   async editAnArticle() {
     await this.editArticle.click();
@@ -22,11 +24,14 @@ export class NewArticlePage extends BasePage {
   async deleteAnArticle() {
     await this.deleteArticle.click();
   }
-  async AddAComment(comment: string) {
+  async addAComment(comment: string) {
     await this.writeAComment.fill(comment);
   }
   async postTheComment() {
     await this.postAcomment.click();
+  }
+  async deleteTheComment() {
+    await this.deleteCommentButton.first().click();
   }
   async giveAHeartForTheArticle() {
     await this.likeTheArticle.click();

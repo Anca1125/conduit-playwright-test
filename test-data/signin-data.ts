@@ -1,8 +1,8 @@
 export const signInData = {
   validUser: {
-    username: "IliutaMishu",
-    email: "IliutaMishu@test.com",
-    password: "IliutaMishu1!",
+    username: "Ecaterina",
+    email: "ecaterina@test.com",
+    password: "Ecaterina1!",
   },
 
   invalidUser: {
