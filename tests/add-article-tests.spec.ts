@@ -32,24 +32,43 @@ test.describe("new article", () => {
   test("user is able to write and post a comment", async ({ page }) => {
     const uniqueTitle = `Playwright ${Date.now()}`;
 
-    await addNewArticlePage.openNewArticleLink();
-    await addNewArticlePage.completeArticleTitle(uniqueTitle);
-    await addNewArticlePage.completeArticleDescription("About Playwright");
-    await addNewArticlePage.completeArticleTextBody(
-      "Playwright is an amaizing automation tool",
-    );
-    await addNewArticlePage.completeTagsArticle("Playwright");
-    await addNewArticlePage.publishArticle();
-
+    // await addNewArticlePage.openNewArticleLink();
+    // await addNewArticlePage.completeArticleTitle(uniqueTitle);
+    // await addNewArticlePage.completeArticleDescription("About Playwright");
+    // await addNewArticlePage.completeArticleTextBody(
+    //   "Playwright is an amaizing automation tool",
+    // );
+    // await addNewArticlePage.completeTagsArticle("Playwright");
+    // await addNewArticlePage.publishArticle();
+    await addNewArticlePage.createArticle(uniqueTitle);
     await expect(page).toHaveURL(/article/);
 
-    await newArticlePage.AddAComment("Playwright is more than awesome!");
+    await newArticlePage.addAComment("Playwright is more than awesome!");
     await newArticlePage.postTheComment();
 
     await expect(
       page.getByText("Playwright is more than awesome!"),
     ).toBeVisible();
   });
+
+  test("user is able to delete the comment", async ({ page }) => {
+    const uniqueTitle = `Playwright${Date.now()}`;
+    const comment = "Playwright is amaizing";
+
+    await addNewArticlePage.createArticle(uniqueTitle);
+
+    await expect(page).toHaveURL(/article/);
+
+    await newArticlePage.addAComment(comment);
+    await newArticlePage.postTheComment();
+
+    await expect(page.getByText("Playwright is amaizing")).toBeVisible();
+
+    await newArticlePage.deleteTheComment();
+
+    await expect(page.getByText("Playwright is amaizing")).not.toBeVisible();
+  });
+
   test("user is able to edit the article", async ({ page }) => {
     const uniqueTitle = `Playwright ${Date.now()}`;
 
